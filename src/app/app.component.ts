@@ -7,7 +7,6 @@ import {GatewayModel} from './gatewaymodel/gatewaymodel';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'tes';
   gateways = [
     new GatewayModel('gateway1', 'description1'),
     new GatewayModel('gateway2', 'description2'),
