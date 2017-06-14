@@ -12,6 +12,9 @@ import { RouterModule, Routes } from '@angular/router';
 import {GatewayStatistics} from 'app/gatewaystatistics/gatewaystatistics.component';
 import {BehaviorSubject} from 'rxjs';
 import {GatewayService} from 'app/gatewayservice/gatewayservice';
+import { ChartsModule } from 'ng2-charts/ng2-charts';
+import {TempChart} from 'app/gatewaystatistics/tempChart/tempchart.component';
+
 
 const appRoutes: Routes = [
   { path: 'show-statistics', component: GatewayStatistics }
@@ -21,7 +24,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     GatewayCardComponent,
-    GatewayStatistics
+    GatewayStatistics,
+    TempChart
   ],
   imports: [
     BrowserModule,
@@ -30,7 +34,8 @@ const appRoutes: Routes = [
     MdCheckboxModule,
     MdCardModule,
     MdGridListModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    ChartsModule
   ],
   providers: [GatewayService],
   bootstrap: [AppComponent]

@@ -12,7 +12,6 @@ export class GatewayCardComponent {
   @Input() gateway: GatewayModel;
 
   constructor(private gatewayService: GatewayService){
-
   }
 
   clicked(event) {
