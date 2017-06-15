@@ -14,6 +14,7 @@ import {BehaviorSubject} from 'rxjs';
 import {GatewayService} from 'app/gatewayservice/gatewayservice';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import {TempChart} from 'app/gatewaystatistics/tempChart/tempchart.component';
+import {HumidityChart} from 'app/gatewaystatistics/humidityChart/humiditychart.component';
 
 
 const appRoutes: Routes = [
@@ -25,7 +26,8 @@ const appRoutes: Routes = [
     AppComponent,
     GatewayCardComponent,
     GatewayStatistics,
-    TempChart
+    TempChart,
+    HumidityChart
   ],
   imports: [
     BrowserModule,
