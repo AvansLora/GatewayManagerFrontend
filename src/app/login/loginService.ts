@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
+import {Http, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import {Observable} from 'rxjs';
 /**
  * Created by gjoosen on 20/06/2017.
@@ -8,7 +8,7 @@ import {Observable} from 'rxjs';
 @Injectable()
 export class LoginService {
 
-  private authenticationUrl = '145.48.6.73:8081/apiV1/authenticate';
+  private authenticationUrl = 'http://localhost:8081/apiV1/authenticate';
 
   loggedIn: boolean;
   token: string;
@@ -16,8 +16,16 @@ export class LoginService {
   constructor(private http: Http){}
 
   public login(username: string, password: string): Observable<string> {
-      const body = '{ "username": "admin", "password":"admin"}';
-      return this.http.post(this.authenticationUrl, body).map(res => res.json()).catch(this.handleError);
+      let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+      let options = new RequestOptions({headers : headers});
+
+      let urlSearchParams = new URLSearchParams();
+      urlSearchParams.append('username', username);
+      urlSearchParams.append('password', password);
+      let body = urlSearchParams.toString();
+      
+      return this.http.post(this.authenticationUrl, body, options).
+      map(res => res.json()).catch(this.handleError);
   }
 
   private handleError (error: Response | any) {
