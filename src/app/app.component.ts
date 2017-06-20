@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {GatewayModel} from './gatewaymodel/gatewaymodel';
+import {LoginService} from "./login/loginService";
 
 @Component({
   selector: 'app-root',
@@ -13,4 +14,9 @@ export class AppComponent {
     new GatewayModel('gateway3', 'description3'),
     new GatewayModel('gateway4', 'description4'),
     new GatewayModel('gateway5', 'description5')];
+
+
+    constructor(private loginService:LoginService){
+
+    }
 }

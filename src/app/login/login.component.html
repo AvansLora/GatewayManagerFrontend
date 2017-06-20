@@ -1,0 +1,19 @@
+<h1>
+  Login Component!
+</h1>
+
+<div style="width: 200px;">
+
+  <td>
+    <md-input-container>
+    <input [value]="usernameStr" (input)="usernameStr = $event.target.value" mdInput placeholder="Login">
+  </md-input-container>
+  </td>
+  <td>
+    <md-input-container>
+      <input [value]="passwordStr" (input)="passwordStr = $event.target.value" mdInput type="password" placeholder="Password">
+    </md-input-container>
+  </td>
+  <button   (click)="authenticateButtonClicked()" md-button>Login</button>
+  <button md-button (click)="cancelButton()">Cancel</button>
+</div>

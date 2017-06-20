@@ -15,6 +15,10 @@ import {GatewayService} from 'app/gatewayservice/gatewayservice';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import {TempChart} from 'app/gatewaystatistics/tempChart/tempchart.component';
 import {HumidityChart} from 'app/gatewaystatistics/humidityChart/humiditychart.component';
+import {LoginComponent} from "./login/login.component";
+import {LoginService} from "./login/loginService";
+import {MdInputModule} from '@angular/material';
+import {HttpModule} from "@angular/http";
 
 
 const appRoutes: Routes = [
@@ -27,7 +31,8 @@ const appRoutes: Routes = [
     GatewayCardComponent,
     GatewayStatistics,
     TempChart,
-    HumidityChart
+    HumidityChart,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -35,11 +40,13 @@ const appRoutes: Routes = [
     MdButtonModule,
     MdCheckboxModule,
     MdCardModule,
+    MdInputModule,
     MdGridListModule,
     RouterModule.forRoot(appRoutes),
-    ChartsModule
+    ChartsModule,
+    HttpModule
   ],
-  providers: [GatewayService],
+  providers: [GatewayService, LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
