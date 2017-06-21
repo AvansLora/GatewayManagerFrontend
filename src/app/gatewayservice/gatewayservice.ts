@@ -29,13 +29,13 @@ export class GatewayService {
     return this.http.post(this.gatewaysUrl, body, options).map(res => res.json()).catch(this.handleError);
   }
 
-  public getAllMeasurements(gatewayID: number): Observable<number>{
+  public getAllMeasurements(): Observable<any>{
     const head = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
     const options = new RequestOptions({headers : head});
 
     const urlSearchParams = new URLSearchParams();
     urlSearchParams.append('token', this.loginService.token);
-    urlSearchParams.append('gatewayid', gatewayID.toString());
+    urlSearchParams.append('gatewayid', this.selectedGateway.getValue().description.toString());
 
     const body = urlSearchParams.toString();
 

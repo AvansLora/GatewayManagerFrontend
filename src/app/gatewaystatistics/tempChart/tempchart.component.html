@@ -1,12 +1,12 @@
-<div>
+<div *ngIf="this.tempChart">
   <canvas baseChart width="600" height="450"
-          [datasets]="lineChartData"
-          [labels]="lineChartLabels"
-          [options]="lineChartOptions"
-          [colors]="lineChartColors"
-          [legend]="lineChartLegend"
-          [chartType]="lineChartType"
-          (chartHover)="chartHovered($event)"
-          (chartClick)="chartClicked($event)">
+          [datasets]="this.tempChart.lineChartData"
+          [labels]="this.tempChart.lineChartLabels"
+          [options]="this.tempChart.lineChartOptions"
+          [colors]="this.tempChart.lineChartColors"
+          [legend]="this.tempChart.lineChartLegend"
+          [chartType]="this.tempChart.lineChartType"
+          (chartHover)="this.tempChart.chartHovered($event)"
+          (chartClick)="this.tempChart.chartClicked($event)">
   </canvas>
 </div>

@@ -14,7 +14,6 @@ export class GatewaysGrid{
   gateways = [
     ];
 
-
   constructor(private gatewayService: GatewayService) {
     const a = this.gatewayService.getGatewaysList().subscribe(res => {
       console.log('res');

@@ -20,6 +20,7 @@ import {LoginService} from "./login/loginService";
 import {MdInputModule} from '@angular/material';
 import {HttpModule} from "@angular/http";
 import {GatewaysGrid} from "./gatewaysgrid/gatewaysgrid.component";
+import {StatisticValue} from "./gatewaystatistics/statisticValue";
 
 
 const appRoutes: Routes = [

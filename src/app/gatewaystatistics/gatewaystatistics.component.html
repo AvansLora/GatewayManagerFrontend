@@ -1,6 +1,5 @@
 <md-grid-list cols="2" rows="8" rowHeight="80px">
   <!--title-->
-  <!--empty col-->
   <md-grid-tile
     [colspan]="2"
     [rowspan]="1">
@@ -9,21 +8,18 @@
     </div>
   </md-grid-tile>
 
-  <!--charts-->
+  <!--Titles-->
   <md-grid-tile [rowspan]="1">
     <h2>Temperatuur</h2>
   </md-grid-tile>
-
-
   <md-grid-tile [rowspan]="1">
     <h2>Luchtvochtigheid</h2>
   </md-grid-tile>
 
-
+  <!--charts-->
   <md-grid-tile [rowspan]="6">
     <app-tempchart></app-tempchart>
   </md-grid-tile>
-
   <md-grid-tile [rowspan]="6">
     <app-humiditychart></app-humiditychart>
   </md-grid-tile>

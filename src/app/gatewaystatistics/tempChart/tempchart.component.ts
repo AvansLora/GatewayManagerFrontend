@@ -4,6 +4,9 @@
 
 
 import {Component, OnInit} from '@angular/core';
+import {GatewayService} from '../../gatewayservice/gatewayservice';
+import {StatisticValue} from '../statisticValue';
+import {LineChart} from '../lineChart'
 
 @Component({
   selector: 'app-tempchart',
@@ -11,60 +14,66 @@ import {Component, OnInit} from '@angular/core';
 })
 
 export class TempChart {
-  // lineChart
-  public lineChartData: Array<any> = [
-    {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
-  ];
-  public lineChartLabels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-  public lineChartOptions: any = {
+  tempChart: RawValuesLineChart;
+  constructor(private gatewayService: GatewayService) {
+    gatewayService.getAllMeasurements().subscribe(res => {
+
+      this.tempChart = new RawValuesLineChart('rgba(153, 210, 246,0.2)', 'rgba(153, 210, 246,1)');
+      this.tempChart.lineChartLabels = [];
+      this.tempChart.lineChartData = [
+        {label: 'case temperature', data: []}
+      ];
+
+      for (let i = 0; i < res.length; i++) {
+        const caseTemp = res[i]['CaseTemp'];
+        const humidity = res[i]['Humidity'];
+        const dateTime = res[i]['DateTime'];
+
+        const obj = new StatisticValue(caseTemp, humidity, dateTime);
+
+        console.log('casetemp: ' + caseTemp);
+        console.log('date: ' + dateTime);
+
+        this.tempChart.lineChartData[0].data.push(caseTemp);
+        this.tempChart.lineChartLabels.push(dateTime);
+      }
+    });
+  }
+}
+
+class RawValuesLineChart implements LineChart {
+  lineChartData: Array<any>;
+  lineChartLabels: Array<any>;
+  lineChartOptions: any = {
     responsive: true
   };
-  public lineChartColors: Array<any> = [
-    { // grey
-      backgroundColor: 'rgba(148,159,177,0.2)',
-      borderColor: 'rgba(148,159,177,1)',
-      pointBackgroundxColor: 'rgba(148,159,177,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-    },
-    { // dark grey
-      backgroundColor: 'rgba(77,83,96,0.2)',
-      borderColor: 'rgba(77,83,96,1)',
-      pointBackgroundColor: 'rgba(77,83,96,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(77,83,96,1)'
-    },
-    { // grey
+  lineChartColors: Array<any> = [
+    {
       backgroundColor: 'rgba(148,159,177,0.2)',
       borderColor: 'rgba(148,159,177,1)',
       pointBackgroundColor: 'rgba(148,159,177,1)',
       pointBorderColor: '#fff',
       pointHoverBackgroundColor: '#fff',
       pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-    }
-  ];
-  public lineChartLegend = true;
-  public lineChartType = 'line';
+    }];
+  lineChartLegend: any = true;
+  lineChartType: any = 'line';
 
-  public randomize(): void {
-    const _lineChartData: Array<any> = new Array(this.lineChartData.length);
-    for (let i = 0; i < this.lineChartData.length; i++) {
-      _lineChartData[i] = {data: new Array(this.lineChartData[i].data.length), label: this.lineChartData[i].label};
-      for (let j = 0; j < this.lineChartData[i].data.length; j++) {
-        _lineChartData[i].data[j] = Math.floor((Math.random() * 100) + 1);
-      }
-    }
-    this.lineChartData = _lineChartData;
+  constructor(backgroundColor: any, pointColor: any) {
+    this.lineChartColors = [
+      {
+        backgroundColor: backgroundColor,
+        borderColor: 'rgba(148,159,177,1)',
+        pointBackgroundColor: pointColor,
+        pointBorderColor: '#fff',
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+      }];
   }
 
-  // events
-  public chartClicked(e: any): void {
-    console.log(e);
+  chartClicked(e: any): void {
   }
 
-  public chartHovered(e: any): void {
-    console.log(e);
+  chartHovered(e: any): void {
   }
 }

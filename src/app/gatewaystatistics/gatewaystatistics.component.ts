@@ -6,6 +6,7 @@
 import {Component, OnInit} from '@angular/core';
 import {GatewayModel} from '../gatewaymodel/gatewaymodel';
 import {GatewayService} from '../gatewayservice/gatewayservice';
+import {StatisticValue} from './statisticValue';
 
 @Component({
   selector: 'app-gatewaystatistics',
@@ -16,16 +17,7 @@ export class GatewayStatistics implements OnInit{
 
   gateway: GatewayModel;
 
-  constructor(private gatewayService: GatewayService){
-    gatewayService.getAllMeasurements(0).subscribe(res => {
-
-      //loop over res
-
-
-
-
-    });
-  }
+  constructor(private gatewayService: GatewayService){}
 
   ngOnInit(): void {
     this.gatewayService.selectedGateway.subscribe(value => {

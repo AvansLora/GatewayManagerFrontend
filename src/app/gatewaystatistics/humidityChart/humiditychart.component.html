@@ -1,12 +1,12 @@
-<div>
+<div *ngIf="this.humidityChart">
   <canvas baseChart width="600" height="450"
-          [datasets]="lineChartData"
-          [labels]="lineChartLabels"
-          [options]="lineChartOptions"
-          [colors]="lineChartColors"
-          [legend]="lineChartLegend"
-          [chartType]="lineChartType"
-          (chartHover)="chartHovered($event)"
-          (chartClick)="chartClicked($event)">
+          [datasets]="this.humidityChart.lineChartData"
+          [labels]="this.humidityChart.lineChartLabels"
+          [options]="this.humidityChart.lineChartOptions"
+          [colors]="this.humidityChart.lineChartColors"
+          [legend]="this.humidityChart.lineChartLegend"
+          [chartType]="this.humidityChart.lineChartType"
+          (chartHover)="this.humidityChart.chartHovered($event)"
+          (chartClick)="this.humidityChart.chartClicked($event)">
   </canvas>
 </div>
