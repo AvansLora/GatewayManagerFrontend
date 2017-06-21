@@ -8,7 +8,7 @@ import {Observable} from 'rxjs';
 @Injectable()
 export class LoginService {
 
-  private authenticationUrl = 'http://localhost:8081/apiV1/authenticate';
+  private authenticationUrl = 'http://145.48.6.73:8081/apiV1/authenticate';
 
   loggedIn: boolean;
   token: string;
@@ -23,9 +23,8 @@ export class LoginService {
       urlSearchParams.append('username', username);
       urlSearchParams.append('password', password);
       let body = urlSearchParams.toString();
-      
-      return this.http.post(this.authenticationUrl, body, options).
-      map(res => res.json()).catch(this.handleError);
+
+      return this.http.post(this.authenticationUrl, body, options).map(res => res.json()).catch(this.handleError);
   }
 
   private handleError (error: Response | any) {

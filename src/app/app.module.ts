@@ -19,6 +19,7 @@ import {LoginComponent} from "./login/login.component";
 import {LoginService} from "./login/loginService";
 import {MdInputModule} from '@angular/material';
 import {HttpModule} from "@angular/http";
+import {GatewaysGrid} from "./gatewaysgrid/gatewaysgrid.component";
 
 
 const appRoutes: Routes = [
@@ -32,7 +33,8 @@ const appRoutes: Routes = [
     GatewayStatistics,
     TempChart,
     HumidityChart,
-    LoginComponent
+    LoginComponent,
+    GatewaysGrid
   ],
   imports: [
     BrowserModule,

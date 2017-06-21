@@ -17,7 +17,14 @@ export class GatewayStatistics implements OnInit{
   gateway: GatewayModel;
 
   constructor(private gatewayService: GatewayService){
+    gatewayService.getAllMeasurements(0).subscribe(res => {
 
+      //loop over res
+
+
+
+
+    });
   }
 
   ngOnInit(): void {

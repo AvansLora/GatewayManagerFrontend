@@ -9,27 +9,22 @@ import {LoginService} from './loginService';
   selector: 'app-login'
 })
 
-export class LoginComponent{
+export class LoginComponent {
 
 
   protected usernameStr: string;
   protected passwordStr: string;
 
   constructor(private loginService: LoginService){
-    this.usernameStr = '';
-    this.passwordStr = '';
+    this.usernameStr = 'admin';
+    this.passwordStr = 'admin';
   }
 
   authenticateButtonClicked(event) {
-
-    // console.log('username: ', this.usernameStr);
-    // console.log('password: ', this.passwordStr);
-
     this.loginService.login(this.usernameStr, this.passwordStr).subscribe(res => {
-      console.log(res);
+      this.loginService.token = res['token'];
+      this.loginService.loggedIn = true;
     });
-
-    // this.loginService.loggedIn = true;
   }
 
   cancelButton(event){
