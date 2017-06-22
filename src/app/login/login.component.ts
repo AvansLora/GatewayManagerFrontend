@@ -16,8 +16,8 @@ export class LoginComponent {
   protected passwordStr: string;
 
   constructor(private loginService: LoginService){
-    this.usernameStr = 'admin';
-    this.passwordStr = 'admin';
+    this.usernameStr = '';
+    this.passwordStr = '';
   }
 
   authenticateButtonClicked(event) {
