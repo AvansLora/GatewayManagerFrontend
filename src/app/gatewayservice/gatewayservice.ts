@@ -12,8 +12,9 @@ import {LoginService} from '../login/loginService';
 @Injectable()
 export class GatewayService {
   selectedGateway: BehaviorSubject<GatewayModel>;
+  selected: boolean = false;
   private gatewaysUrl = 'http://145.48.6.73:8081/apiV1/listgateways';
-  private gatewayValues = 'http://145.48.6.73:8081/apiV1/allmeasurements';
+  private gatewayValues = 'http://145.48.6.73:8081/apiV1/getmeasurements';
 
   constructor(private http: Http, private loginService: LoginService){}
 
@@ -36,6 +37,7 @@ export class GatewayService {
     const urlSearchParams = new URLSearchParams();
     urlSearchParams.append('token', this.loginService.token);
     urlSearchParams.append('gatewayid', this.selectedGateway.getValue().description.toString());
+    urlSearchParams.append('limit', '48');
 
     const body = urlSearchParams.toString();
 

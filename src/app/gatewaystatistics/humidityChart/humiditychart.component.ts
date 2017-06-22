@@ -16,27 +16,30 @@ import {GatewayService} from '../../gatewayservice/gatewayservice';
 export class HumidityChart {
   humidityChart: RawValuesLineChart;
   constructor(private gatewayService: GatewayService) {
-    gatewayService.getAllMeasurements().subscribe(res => {
 
-      this.humidityChart = new RawValuesLineChart('rgba(153, 210, 246,0.2)', 'rgba(153, 210, 246,1)');
-      this.humidityChart.lineChartLabels = [];
-      this.humidityChart.lineChartData = [
-        {label: 'humidity', data: []}
-      ];
+    gatewayService.selectedGateway.asObservable().subscribe(gateway => {
+      gatewayService.getAllMeasurements().subscribe(res => {
 
-      for (let i = 0; i < res.length; i++) {
-        const caseTemp = res[i]['CaseTemp'];
-        const humidity = res[i]['Humidity'];
-        const dateTime = res[i]['DateTime'];
+        this.humidityChart = new RawValuesLineChart('rgba(153, 210, 246,0.2)', 'rgba(153, 210, 246,1)');
+        this.humidityChart.lineChartLabels = [];
+        this.humidityChart.lineChartData = [
+          {label: 'humidity', data: []}
+        ];
 
-        const obj = new StatisticValue(caseTemp, humidity, dateTime);
+        for (let i = 0; i < res.length; i++) {
+          const caseTemp = res[i]['CaseTemp'];
+          const humidity = res[i]['Humidity'];
+          const dateTime = res[i]['DateTime'];
 
-        console.log('casetemp: ' + caseTemp);
-        console.log('date: ' + dateTime);
+          const obj = new StatisticValue(caseTemp, humidity, dateTime);
 
-        this.humidityChart.lineChartData[0].data.push(humidity);
-        this.humidityChart.lineChartLabels.push(dateTime);
-      }
+          console.log('casetemp: ' + caseTemp);
+          console.log('date: ' + dateTime);
+
+          this.humidityChart.lineChartData[0].data.push(humidity);
+          this.humidityChart.lineChartLabels.push(dateTime);
+        }
+      });
     });
   }
 }

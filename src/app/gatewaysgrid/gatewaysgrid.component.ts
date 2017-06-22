@@ -1,20 +1,18 @@
 import {Component} from '@angular/core';
 import {GatewayService} from '../gatewayservice/gatewayservice';
-import {LoginService} from '../login/loginService';
 import {GatewayModel} from '../gatewaymodel/gatewaymodel';
 
 @Component({
   selector: 'app-gateway-grid',
   templateUrl: 'gatewaysgrid.component.html',
-  styleUrls: ['gatewaysgrid.css']
+  styleUrls: ['gatewaysgrid.css'],
 })
 
 export class GatewaysGrid{
 
-  gateways = [
-    ];
+  gateways = [];
 
-  constructor(private gatewayService: GatewayService) {
+  constructor(public gatewayService: GatewayService) {
     const a = this.gatewayService.getGatewaysList().subscribe(res => {
       console.log('res');
 
@@ -27,6 +25,5 @@ export class GatewaysGrid{
         this.gateways.push(new GatewayModel(name, id));
       }
     });
-    console.log(a);
   }
 }

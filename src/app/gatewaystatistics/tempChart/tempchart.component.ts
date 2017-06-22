@@ -16,27 +16,32 @@ import {LineChart} from '../lineChart'
 export class TempChart {
   tempChart: RawValuesLineChart;
   constructor(private gatewayService: GatewayService) {
-    gatewayService.getAllMeasurements().subscribe(res => {
 
-      this.tempChart = new RawValuesLineChart('rgba(153, 210, 246,0.2)', 'rgba(153, 210, 246,1)');
-      this.tempChart.lineChartLabels = [];
-      this.tempChart.lineChartData = [
-        {label: 'case temperature', data: []}
-      ];
+    gatewayService.selectedGateway.asObservable().subscribe(gateway => {
+      gatewayService.getAllMeasurements().subscribe(res => {
 
-      for (let i = 0; i < res.length; i++) {
-        const caseTemp = res[i]['CaseTemp'];
-        const humidity = res[i]['Humidity'];
-        const dateTime = res[i]['DateTime'];
+        this.tempChart = new RawValuesLineChart('rgba(153, 210, 246,0.2)', 'rgba(153, 210, 246,1)');
+        this.tempChart.lineChartLabels = [];
+        this.tempChart.lineChartData = [
+          {label: 'case temperature', data: []}
+        ];
 
-        const obj = new StatisticValue(caseTemp, humidity, dateTime);
+        for (let i = 0; i < res.length; i++) {
+          const caseTemp = res[i]['CaseTemp'];
+          const humidity = res[i]['Humidity'];
+          const dateTime = res[i]['DateTime'];
 
-        console.log('casetemp: ' + caseTemp);
-        console.log('date: ' + dateTime);
+          const obj = new StatisticValue(caseTemp, humidity, dateTime);
 
-        this.tempChart.lineChartData[0].data.push(caseTemp);
-        this.tempChart.lineChartLabels.push(dateTime);
-      }
+          console.log('casetemp: ' + caseTemp);
+          console.log('date: ' + dateTime);
+
+          this.tempChart.lineChartData[0].data.push(caseTemp);
+          this.tempChart.lineChartLabels.push(dateTime);
+        }
+
+        this.tempChart.lineChartData.slice();
+      });
     });
   }
 }

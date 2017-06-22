@@ -16,5 +16,6 @@ export class GatewayCardComponent {
 
   clicked(event) {
     this.gatewayService.selectedGateway.next(this.gateway);
+    this.gatewayService.selected = true;
   }
 }
